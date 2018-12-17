@@ -43,6 +43,7 @@ task dockerSyncArchive(type: Sync) {
 	into dockerBuildDir
 }
 task dockerCreateDockerfile(type: Dockerfile, dependsOn : [jar]) {
+    destFile = file("$dockerBuildDir/Dockerfile")
     from 'openjdk:11-slim'
     copyFile jar.archiveName, "service.jar"
     defaultCommand "java","-jar","service.jar"
